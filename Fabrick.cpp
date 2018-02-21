@@ -6,7 +6,6 @@
 
  Version   : 1.00
  Original Author    : Khoo Boon Kien 
- Editor: AmirK
 
  History:
    13-February-18
