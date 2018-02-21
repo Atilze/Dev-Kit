@@ -1,0 +1,52 @@
+/*
+ Atilze LoRa Development Kit
+ It consists of Atilze LoRa shield and sensors for IoT development. Below are the sensors:
+   * Water level sensor
+   * PH level sensor 
+ Version   : 1.00
+ Original Author    : Khoo Boon Kien 
+ Editor: AmirAzahar
+ History:
+   13-February-18
+ */
+
+#include <Fabrick.h>
+
+//****************************************
+// Initialisations
+//****************************************
+// Pins assignment
+// Default pins assignment located at Fabrick.h
+SoftwareSerial lora_serial(pinLoraRx, pinLoraTx);       // Software serial for LoRa module
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EDIT HERE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Device ID
+String device_id = "ef14251d";
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Fabrick library
+Fabrick fabrick;      
+//****************************************
+// Setup
+//****************************************
+void setup() {
+  // Initialise serial for debugging
+  Serial.begin(9600);
+  Serial.println("***********************************************************************"); 
+  Serial.println("                  Fabrick LoRa Development Kit");
+  Serial.println("***********************************************************************");
+  fabrick.lora_dk_begin( &lora_serial,&Serial);     // Setup LoRa DK
+}
+
+//****************************************
+// Main Loop
+//****************************************
+void loop() {
+  // Delay to let LoRa startup
+  delay(6000);
+
+  // Send Water Level data
+  fabrick.lora_send_waterLevel(device_id);
+ 
+  // Send pH Level data
+  fabrick.lora_send_phLevel(device_id);
+}
